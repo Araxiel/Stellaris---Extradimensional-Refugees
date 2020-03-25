@@ -374,8 +374,8 @@ generate_start_deposits_and_blockers_extragalactic_refugees = {
 	remove_all_districts = yes
 	remove_all_buildings = yes
 
-	add_building = building_capital
 	add_building = building_field_hq
+	add_building = building_emergency_generator
 	add_deposit = deposit_emergency_supplies_egr
 	add_deposit = deposit_emergency_supplies_egr
 	add_deposit = deposit_emergency_materials_egr
