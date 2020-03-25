@@ -1,4 +1,92 @@
-# This is called after game start
+## On planet
+switch_to_hostile_planet = {
+	## dry preference
+	if = {
+		limit = {
+			owner_species = {
+				OR = {
+					has_trait = trait_pc_desert_preference
+					has_trait = trait_pc_arid_preference
+					has_trait = trait_pc_savannah_preference
+				}
+			}
+		}
+		random_list = {
+			1 = { 
+				random_list = {
+					1 = { change_pc = pc_tropical }
+					1 = { change_pc = pc_continental }
+					1 = { change_pc = pc_ocean }
+				}
+			}
+			1 = { 
+				random_list = {
+					1 = { change_pc = pc_tundra }
+					1 = { change_pc = pc_arctic }
+					1 = { change_pc = pc_alpine }
+				}
+			}
+		}
+	}
+	## wet preference
+	if = {
+		limit = {
+			owner_species = {
+				OR = {
+					has_trait = trait_pc_tropical_preference
+					has_trait = trait_pc_continental_preference
+					has_trait = trait_pc_ocean_preference
+				}
+			}
+		}
+		random_list = {
+			1 = { 
+				random_list = {
+					1 = { change_pc = pc_desert }
+					1 = { change_pc = pc_arid }
+					1 = { change_pc = pc_savannah }
+				}
+			}
+			1 = { 
+				random_list = {
+					1 = { change_pc = pc_tundra }
+					1 = { change_pc = pc_arctic }
+					1 = { change_pc = pc_alpine }
+				}
+			}
+		}
+	}
+	## cold preference
+	if = {
+		limit = {
+			owner_species = {
+				OR = {
+					has_trait = trait_pc_arctic_preference
+					has_trait = trait_pc_tundra_preference
+					has_trait = trait_pc_alpine_preference
+				}
+			}
+		}
+		random_list = {
+			1 = { 
+				random_list = {
+					1 = { change_pc = pc_desert }
+					1 = { change_pc = pc_arid }
+					1 = { change_pc = pc_savannah }
+				}
+			}
+			1 = { 
+				random_list = {
+					1 = { change_pc = pc_tropical }
+					1 = { change_pc = pc_continental }
+					1 = { change_pc = pc_ocean }
+				}
+			}
+		}
+	}
+}
+
+# Called on game start, after egr script, on planet
 generate_start_vanilla_deposits_egr = {
 	if = {
 		limit = {
@@ -360,15 +448,27 @@ generate_start_vanilla_deposits_egr = {
 	}
 }
 
+# Called on game start, on capital planet
 generate_start_deposits_and_blockers_extragalactic_refugees = {
 	clear_deposits = yes
 
-	## basic
+	## switch to more hostile planet
+	set_planet_size = 18
+	random_list = {
+		1 = { change_planet_size = 1 }
+		1 = { }
+		2 = { change_planet_size = -1 }
+		2 = { change_planet_size = -2 }
+		1 = { change_planet_size = -3 }
+	}
+	switch_to_hostile_planet = yes
+
+	## basic deposits
 	generate_start_vanilla_deposits_egr = yes
 
 	## special
 	add_deposit = d_evacuation_gate
-	add_deposit = d_refugee_camp
+	add_deposit = d_city_ruins
 
 	## starting building and districts
 	remove_all_districts = yes
