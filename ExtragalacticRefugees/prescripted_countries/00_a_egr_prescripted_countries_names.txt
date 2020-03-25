@@ -29,7 +29,7 @@ marween = {
 	origin = "origin_extragalactic_refugees"
 
 	initializer=""
-	flags = { marween_refugee }
+	flags = { marween_refugee custom_start_screen }
 
 	planet_name="PRESCRIPTED_ipago"
 	system_name="PRESCRIPTED_ipago_tryll"
