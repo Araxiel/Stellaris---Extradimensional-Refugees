@@ -103,8 +103,8 @@ deposit_emergency_supplies_egr = {
 	}
 
 	on_cleared = {
-		owner = { add_resource = { food = 500 } }
-		owner = { add_resource = { consumer_goods = 100 } }
+		owner = { add_resource = { food = 350 } }
+		owner = { add_resource = { consumer_goods = 50 } }
 	}
 
 }
@@ -132,8 +132,8 @@ deposit_emergency_materials_egr = {
 	}
 
 	on_cleared = {
-		owner = { add_resource = { minerals = 600 } }
-		owner = { add_resource = { alloys = 100 } }
+		owner = { add_resource = { minerals = 300 } }
+		owner = { add_resource = { alloys = 50 } }
 	}
 
 }
