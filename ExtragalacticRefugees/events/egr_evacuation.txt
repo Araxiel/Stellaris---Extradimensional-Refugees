@@ -1,0 +1,77 @@
+namespace = egr_start
+
+### Hidden Game Start Event
+event = {
+	id = egr_start.10
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		every_playable_country = {
+			limit = { 
+				has_origin = origin_extragalactic_refugees
+			}
+			capital_scope = {
+				generate_start_deposits_and_blockers_extragalactic_refugees = yes
+				save_global_event_target_as = extragalactic_refugee_planet_@PREV
+			}
+			country_event = { id = egr_evacuation.20 days = 10 }
+		}
+	}
+}
+
+namespace = egr_evacuation
+
+### Start of chain
+country_event = {
+	id = egr_evacuation.20
+	title = egr_evacuation.20.name
+	desc = egr_evacuation.20.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = egr_evacuation.20.a
+
+		begin_event_chain = {
+			event_chain = "extragalactic_refugees_chain"
+			target = event_target:extragalactic_refugee_planet_@THIS
+		}
+		event_target:extragalactic_refugee_planet_@THIS = {
+			planet_event = { id = egr_evacuation.30 days = 40 random = 20 }
+		}
+	}
+
+}
+
+## First arrivals
+planet_event = {
+	id = egr_evacuation.30
+	title = egr_evacuation.30.name
+	desc = egr_evacuation.30.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = egr_evacuation.20.a
+		while = {
+			count = 4
+			create_pop = {
+				species = owner_main_species
+			}
+		}
+	}
+
+}
