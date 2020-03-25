@@ -1,0 +1,40 @@
+﻿l_english:
+
+ origin_extragalactic_refugees: "Extragalactic Refugees"
+ origin_extragalactic_refugees_desc: "This civilization fled through a portal from a far-away galaxy. TODO"
+ origin_tooltip_extragalactic_refugees_effects: "\n- No guaranteed habitable worlds will spawn near your home system \n- Your home world will be a different type than your habitability"
+ START_SCREEN_DOOMSDAY: "You're like refugees and shit TODO"
+
+ START_SCREEN_EXTRAGALACTIC_REFUGEES: "There's like a portal and shit TODO"
+
+ d_evacuation_gate: "Evacuation Gate"
+ d_evacuation_gate_desc: "The interdimensional gate, connecting to [Root.Owner.GetSpeciesName] home world."
+ d_evacuation_gate_deactivated: "Deactivated Evacuation Gate"
+ d_evacuation_gate_deactivated_desc: "The interdimensional gate, broken down, used up and useless. A grim reminder of where we came from."
+ d_refugee_camp: "Refugee Camp"
+ d_refugee_camp_desc: "A temporary housing for the many refugees streaming through the gate."
+ building_field_hq: "Field HQ"
+ building_field_hq_desc: "A temporary field HQ set up to help with the evacuation."
+ deposit_emergency_supplies_egr: "Emergency Supplies"
+ deposit_emergency_supplies_egr_desc: "Emergency supplies to help with the evacuation. It will take time to unpack, ration and distribute them."
+ deposit_emergency_materials_egr: "Emergency Materials"
+ deposit_emergency_materials_egr_desc: "Deliveries of construction materials that are ready to use. They still have to be retrieved and sorted."
+
+ PRESCRIPTED_name_marween: "Marween Interim Union"
+ START_SCREEN_EXTRAGALACTIC_REFUGEES_MARWEEN: "You're special"
+
+ building_emergency_generator: "Emergency Generator"
+ building_emergency_generator_desc: "An emergency generator build by the pioneers to help power the evacuation."
+ egr_improved_generator_1: "Emergency Generator Protocols"
+ egr_improved_generator_1_desc: "Improvements in the generator will allow us to get more power out of it."
+ egr_improved_generator_2: "Advanced Emergency Generator Regulator"
+ egr_improved_generator_2_desc: "Further allows us to squeeze more power out of the emergency generator."
+ egr_boosted_generator: "Generator Safety Bypass"
+ egr_boosted_generator_desc: "Many of the generator's safety measures have been bypassed."
+ job_emergency_generator_technician: "Emergency Generator Technician"
+ job_emergency_generator_technician_plural: "Emergency Generator Technicians"
+ job_emergency_generator_technician_desc: "These highly qualified engineers operate the emergency generator."
+
+ extragalactic_refugees_chain_title: "Extragalactic Refugees"
+ extragalactic_refugees_chain_desc: "Under siege and facing annihilation, millions of our people are streaming through the reactivated ancient gate trying to rescue themselves. We need to do all that we can to save as many as possible."
+ refugees_saved: "Refugees Saved"
