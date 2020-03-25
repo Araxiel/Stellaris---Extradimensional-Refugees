@@ -11,9 +11,9 @@ event = {
 			limit = { 
 				has_origin = origin_extragalactic_refugees
 			}
+			set_country_flag = egr_ongoing_evacuation
 			capital_scope = {
 				generate_start_deposits_and_blockers_extragalactic_refugees = yes
-				save_global_event_target_as = extragalactic_refugee_planet_@PREV
 			}
 			country_event = { id = egr_evacuation.20 days = 10 }
 		}
@@ -22,7 +22,7 @@ event = {
 
 namespace = egr_evacuation
 
-### Start of chain
+### egr_evacuation.20	-	Start of chain
 country_event = {
 	id = egr_evacuation.20
 	title = egr_evacuation.20.name
@@ -41,16 +41,26 @@ country_event = {
 
 		begin_event_chain = {
 			event_chain = "extragalactic_refugees_chain"
-			target = event_target:extragalactic_refugee_planet_@THIS
+			target = ROOT
 		}
-		event_target:extragalactic_refugee_planet_@THIS = {
+		hidden_effect = { set_variable = { which = var_eg_refugees value = 0 } }
+
+		random_owned_planet = {
+			limit = { has_deposit = d_evacuation_gate }
 			planet_event = { id = egr_evacuation.30 days = 40 random = 20 }
+			create_point_of_interest = {
+				id = extragalactic_refugees_chain_poi.1
+				name = "extragalactic_refugees_chain_poi_1"
+				desc = "extragalactic_refugees_chain_poi_1.desc"
+				event_chain = "extragalactic_refugees_chain"
+				location = THIS
+			}
 		}
 	}
 
 }
 
-## First arrivals
+## egr_evacuation.30	-	First arrivals
 planet_event = {
 	id = egr_evacuation.30
 	title = egr_evacuation.30.name
@@ -65,12 +75,271 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.20.a
-		while = {
-			count = 4
-			create_pop = {
-				species = owner_main_species
+		name = egr_evacuation.30.a
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species ethos = random	}
+		add_building = building_refugee_shelters
+		owner = {
+			add_event_chain_counter = {
+				event_chain = "extragalactic_refugees_chain"
+				counter = "refugees_saved"
+				amount = 3
 			}
+			hidden_effect = { change_variable = { which = var_eg_refugees value = 3 } }
+		}
+		planet_event = { id = egr_evacuation.31 days = 720 random = 360 }
+	}
+
+}
+
+## egr_evacuation.31	-	 Second Group
+planet_event = {
+	id = egr_evacuation.31
+	title = egr_evacuation.31.name
+	desc = egr_evacuation.31.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = egr_evacuation.31.a
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species ethos = random	}
+		create_pop = { species = owner_main_species ethos = random	}
+		owner = {
+			add_event_chain_counter = {
+				event_chain = "extragalactic_refugees_chain"
+				counter = "refugees_saved"
+				amount = 5
+			}
+			hidden_effect = { change_variable = { which = var_eg_refugees value = 3 } }
+		}
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.41	-	 Delayed	TODO
+planet_event = {
+	id = egr_evacuation.41
+	title = egr_evacuation.41.name
+	desc = egr_evacuation.41.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuaton_delayed_group
+		}
+	}
+
+	option = {
+		name = egr_evacuation.41.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.42	-	 Dead	TODO
+planet_event = {
+	id = egr_evacuation.42
+	title = egr_evacuation.42.name
+	desc = egr_evacuation.42.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_dead_group
+		}
+	}
+
+	option = {
+		name = egr_evacuation.42.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.43	-	 rulers	TODO
+planet_event = {
+	id = egr_evacuation.43
+	title = egr_evacuation.43.name
+	desc = egr_evacuation.43.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_rulers_arrived
+		}
+	}
+
+	option = {
+		name = egr_evacuation.43.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.44	-	 massive group	TODO
+planet_event = {
+	id = egr_evacuation.44
+	title = egr_evacuation.44.name
+	desc = egr_evacuation.44.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_massive_group
+		}
+	}
+
+	option = {
+		name = egr_evacuation.44.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.45	-	 energy problems	TODO
+planet_event = {
+	id = egr_evacuation.45
+	title = egr_evacuation.45.name
+	desc = egr_evacuation.45.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			if = {
+				limit = {
+					has_country_flag = evacuation_energy_problems_1
+				}
+				set_country_flag = evacuation_energy_problems_2
+				else = {
+					set_country_flag = evacuation_energy_problems_1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = egr_evacuation.45.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.46	-	 soldiers	TODO
+planet_event = {
+	id = egr_evacuation.46
+	title = egr_evacuation.46.name
+	desc = egr_evacuation.46.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_soldiers
+		}
+	}
+
+	option = {
+		name = egr_evacuation.46.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.47	-	 enemies	TODO
+planet_event = {
+	id = egr_evacuation.47
+	title = egr_evacuation.47.name
+	desc = egr_evacuation.47.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_enemies_slipped_through
+		}
+	}
+
+	option = {
+		name = egr_evacuation.47.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
+		}
+	}
+
+}
+
+## egr_evacuation.50	-	 normal group	TODO
+planet_event = {
+	id = egr_evacuation.50
+	title = egr_evacuation.50.name
+	desc = egr_evacuation.50.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_normal_group
+		}
+	}
+
+	option = {
+		name = egr_evacuation.50.a
+		hidden_effect = {
+			evacuation_complication_picker = yes
 		}
 	}
 
