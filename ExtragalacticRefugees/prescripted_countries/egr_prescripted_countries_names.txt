@@ -1,0 +1,68 @@
+# Marween
+marween = {
+	name = "Marween Interim Union State"
+	adjective = "PRESCRIPTED_adjective_marween"
+	spawn_enabled = yes # yes / no / always
+	
+	ship_prefix=""
+	
+	species={
+		class="REP"
+		portrait="rep5"
+		name="PRESCRIPTED_species_name_marween"
+		plural="PRESCRIPTED_species_plural_marween"
+		adjective="PRESCRIPTED_species_adjective_marween"
+		name_list="REP3"
+		trait="trait_thrifty"
+		trait="trait_weak"
+		trait="trait_nomadic"
+	}
+	
+	room="personality_migrating_flock_room"
+	
+	ethic="ethic_fanatic_pacifist"
+	ethic="ethic_materialist"
+
+	authority = "auth_oligarchic"
+	civics = { "civic_diplomatic_corps" "civic_corvee_system" }
+	government = gov_irenic_bureaucracy
+	origin = "origin_extragalactic_refugees"
+
+	initializer=""
+	flags = { marween_refugee }
+
+	planet_name="PRESCRIPTED_ipago"
+	system_name="PRESCRIPTED_ipago_tryll"
+	planet_class = "pc_desert"
+	
+	graphical_culture = "reptilian_01"
+	city_graphical_culture = "reptilian_01"
+	
+	empire_flag={
+		icon={
+			category="spherical"
+			file="flag_spherical_4.dds"
+		}
+		background={
+			category="backgrounds"
+			file="circle.dds"
+		}
+		colors={
+			"teal"
+			"dark_green"
+			"null"
+			"null"
+		}
+	}
+	
+	ruler={
+		gender=female
+		name="Vamax"
+		portrait="rep5"
+		texture=2
+		hair=0
+		clothes=0
+		leader_class="ruler"
+	}
+
+}
