@@ -1,0 +1,11 @@
+on_game_start = {
+	events = {
+		egr_start.10
+	}
+}
+
+on_building_complete = {
+	events = {
+		# add_modifier 
+	}
+}

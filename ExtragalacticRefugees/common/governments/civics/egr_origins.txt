@@ -1,0 +1,36 @@
+origin_extragalactic_refugees = {
+	is_origin = yes
+	icon = "gfx/interface/icons/origins_extragalactic_refugees.dds"
+	picture = GFX_evt_unknown_ships
+
+	non_colonizable_planet_class_neighbor = yes
+
+	playable = {
+		always = yes
+	}
+
+	possible = {
+		ethics = {
+			NOT = {
+				value = ethic_gestalt_consciousness
+			}
+		}
+		species = {
+			NOT = {
+				value = LITHOID
+			}
+		}
+	}
+
+	description = "origin_tooltip_extragalactic_refugees_effects"
+	
+	flags = { custom_start_screen }
+
+	traits = {
+		# trait = trait_extragalactic_refugee #TODO
+	}
+
+	random_weight = {
+		base = 3
+	}
+}

@@ -1,0 +1,67 @@
+
+egr_improved_generator_1 = {
+	cost = @tier1cost1
+	area = physics
+	tier = 1
+	category = { field_manipulation }
+	weight = @tier2weight3
+
+	weight_modifier = {
+		factor = 2
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = physics
+				has_trait = "leader_trait_expertise_field_manipulation"
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = { has_origin = origin_extragalactic_refugees }
+		}
+	}
+
+	ai_weight = {
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = physics
+				has_trait = "leader_trait_expertise_field_manipulation"
+			}
+		}
+	}
+}
+
+egr_improved_generator_2 = {
+	cost = @tier2cost1
+	area = physics
+	tier = 1
+	category = { field_manipulation }
+	prerequisites = { "egr_improved_generator_1" }
+	weight = @tier2weight3
+
+	weight_modifier = {
+		factor = 2
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = physics
+				has_trait = "leader_trait_expertise_field_manipulation"
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = { has_origin = origin_extragalactic_refugees }
+		}
+	}
+
+	ai_weight = {
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = physics
+				has_trait = "leader_trait_expertise_field_manipulation"
+			}
+		}
+	}
+}

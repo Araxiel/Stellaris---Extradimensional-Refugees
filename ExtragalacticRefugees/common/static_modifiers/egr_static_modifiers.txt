@@ -1,0 +1,4 @@
+egr_boosted_generator = {
+	icon = "gfx/interface/icons/planet_modifiers/pm_surreal_visions.dds"
+	icon_frame = 3
+}

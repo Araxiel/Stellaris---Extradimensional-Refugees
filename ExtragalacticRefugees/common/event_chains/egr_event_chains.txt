@@ -1,0 +1,8 @@
+extragalactic_refugees_chain = {
+	icon = "gfx/interface/icons/situation_log/situation_log_main_quest.dds"
+	picture = GFX_evt_ground_combat
+	counter = {
+		refugees_saved = {
+		}
+	}
+}

@@ -1,0 +1,165 @@
+# Evacuation gate
+d_evacuation_gate = {
+	is_for_colonizeable = yes
+	icon = "d_drifting_gateway"
+	category = deposit_cat_rare
+
+	potential = { always = no }
+
+	planet_modifier = {
+		planet_max_districts_add = -1
+	}
+
+	resources = {
+		category = planet_deposits
+		produces = {
+			trigger = {
+				planet = { has_district = district_rw_farming	}
+			}
+			volatile_motes = 2
+			energy = 10
+		}
+		produces = {
+			society_research = 8
+		}
+	}
+
+}
+
+d_evacuation_gate_deactivated = {
+	time = 100
+
+	icon = "d_drifting_gateway"
+
+	is_for_colonizeable = yes
+	category = deposit_cat_blockers
+
+	potential = {
+		always = no
+	}
+
+	planet_modifier = {
+		planet_max_districts_add = -1
+	}
+
+	resources = {
+		category = deposit_blockers
+		cost = {
+			energy = 300
+		}
+	}
+
+	on_cleared = {
+		if = {
+			limit = {
+				exists = owner
+				owner = {
+					has_ancrel = yes
+				}
+			}
+
+			custom_tooltip = minor_artifacts_found
+			random_list = {
+				33 = {
+					owner = { add_resource = { minor_artifacts = 4 } }
+				}
+				33 = {
+					owner = { add_resource = { minor_artifacts = 8 } }
+				}
+				33 = {
+					owner = { add_resource = { minor_artifacts = 16 } }
+				}
+			}
+			owner = { add_resource = { alloys = 50 } }
+			else = {
+				owner = { add_resource = { alloys = 100 } }
+			}
+		}
+	}
+
+}
+
+# Emergency supplies
+deposit_emergency_supplies_egr = {
+	time = 100
+
+	icon = "d_station_cargo"
+
+	is_for_colonizeable = yes
+	category = deposit_cat_rare_blocker
+
+	potential = {
+		always = no
+	}
+
+	planet_modifier = {
+	}
+
+	resources = {
+		category = deposit_blockers
+		cost = {
+			influence = 10
+		}
+	}
+
+	on_cleared = {
+		owner = { add_resource = { food = 500 } }
+		owner = { add_resource = { consumer_goods = 100 } }
+	}
+
+}
+
+deposit_emergency_materials_egr = {
+	time = 100
+
+	icon = "d_station_cargo"
+
+	is_for_colonizeable = yes
+	category = deposit_cat_rare_blocker
+
+	potential = {
+		always = no
+	}
+
+	planet_modifier = {
+	}
+
+	resources = {
+		category = deposit_blockers
+		cost = {
+			influence = 10
+		}
+	}
+
+	on_cleared = {
+		owner = { add_resource = { minerals = 600 } }
+		owner = { add_resource = { alloys = 100 } }
+	}
+
+}
+
+# Refugee camp
+d_refugee_camp = {
+	time = 100
+
+	icon = "d_quarantine_zone"
+
+	is_for_colonizeable = yes
+	category = deposit_cat_rare_blocker
+
+	potential = {
+		always = no
+	}
+
+	planet_modifier = {
+		planet_max_districts_add = -1
+	}
+
+	resources = {
+		category = deposit_blockers
+		cost = {
+			energy = 300
+			influence = 50
+		}
+	}
+}

@@ -1,0 +1,21 @@
+# Extragalactic Refugees
+part = {
+	location = 0
+	localization = "START_SCREEN_EXTRAGALACTIC_REFUGEES"
+	
+	trigger = {
+		has_origin = origin_extragalactic_refugees
+		NOT = { has_country_flag = marween_refugee }
+	}
+}
+
+# Marween
+part = {
+	location = 0
+	localization = "START_SCREEN_EXTRAGALACTIC_REFUGEES_MARWEEN"
+	
+	trigger = {
+		has_origin = origin_extragalactic_refugees
+		has_country_flag = marween_refugee
+	}
+}

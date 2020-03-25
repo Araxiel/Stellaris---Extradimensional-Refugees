@@ -1,0 +1,21 @@
+special_project = {
+	key = "ENIGMATIC_FORTRESS_1A"
+	event_chain = "extragalactic_refugees_chain"
+	cost = 0
+	days_to_research = 30
+	tech_department = engineering_technology
+	timelimit = 1080
+	picture = GFX_evt_enigmatic_fortress
+	
+	event_scope = ship_event
+
+	requirements = {
+		shipclass_transport = 1
+	}
+	
+	on_success = {
+		ship_event = { id = leviathans.2112 }
+	}
+	
+	on_fail = {	country_event = { id = leviathans.2160 } }
+}
