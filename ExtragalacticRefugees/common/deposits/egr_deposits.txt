@@ -8,19 +8,13 @@ d_evacuation_gate = {
 
 	planet_modifier = {
 		planet_max_districts_add = -1
+		planet_jobs_physics_research_produces_mult = 0.15
 	}
 
 	resources = {
 		category = planet_deposits
 		produces = {
-			trigger = {
-				planet = { has_district = district_rw_farming	}
-			}
-			volatile_motes = 2
-			energy = 10
-		}
-		produces = {
-			society_research = 8
+			energy = -10
 		}
 	}
 
@@ -139,7 +133,7 @@ deposit_emergency_materials_egr = {
 }
 
 # Refugee camp
-d_refugee_camp = {
+d_abandoned_refugee_camp = {
 	time = 100
 
 	icon = "d_quarantine_zone"
