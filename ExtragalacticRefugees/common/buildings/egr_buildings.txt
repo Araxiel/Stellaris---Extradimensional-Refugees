@@ -113,7 +113,7 @@ building_refugee_shelters = {
 
 	planet_modifier = {
 		planet_housing_add = 8
-		planet_crime_add = 15
+		planet_amenities_add = -15
 	}
 
 	resources = {

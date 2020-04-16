@@ -26,6 +26,9 @@ switch_to_hostile_planet = {
 					1 = { change_pc = pc_alpine }
 				}
 			}
+			1 = {
+				change_pc = pc_arctic
+			}
 		}
 	}
 	## wet preference
@@ -53,6 +56,9 @@ switch_to_hostile_planet = {
 					1 = { change_pc = pc_arctic }
 					1 = { change_pc = pc_alpine }
 				}
+			}
+			1 = {
+				change_pc = pc_arctic
 			}
 		}
 	}
@@ -483,7 +489,7 @@ generate_start_deposits_and_blockers_extragalactic_refugees = {
 
 	## cull starting population
 	while = {
-		count = 20
+		count = 22
 		random_pop = {
 			kill_pop = yes
 		}

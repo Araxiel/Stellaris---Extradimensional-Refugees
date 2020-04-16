@@ -1,4 +1,4 @@
-﻿l_english:
+l_english:
 
  origin_extragalactic_refugees: "Extragalactic Refugees"
  origin_extragalactic_refugees_desc: "This civilization fled through a portal from a far-away galaxy. TODO"
@@ -8,7 +8,7 @@
  START_SCREEN_EXTRAGALACTIC_REFUGEES: "There's like a portal and shit TODO"
 
  d_evacuation_gate: "Evacuation Gate"
- d_evacuation_gate_desc: "The interdimensional gate, connecting to [Root.Owner.GetSpeciesName] home world."
+ d_evacuation_gate_desc: "The interdimensional gate, connecting to your species' original home world."
  d_evacuation_gate_deactivated: "Deactivated Evacuation Gate"
  d_evacuation_gate_deactivated_desc: "The interdimensional gate, broken down, used up and useless. A grim reminder of where we came from."
  d_refugee_camp: "Refugee Camp"
@@ -21,7 +21,7 @@
  deposit_emergency_materials_egr_desc: "Deliveries of construction materials that are ready to use. They still have to be retrieved and sorted."
 
  PRESCRIPTED_name_marween: "Marween Interim Union"
- START_SCREEN_EXTRAGALACTIC_REFUGEES_MARWEEN: "$START_SCREEN_EXTRAGALACTIC_REFUGEES$\nYou're extra special"
+ START_SCREEN_EXTRAGALACTIC_REFUGEES_MARWEEN: "$START_SCREEN_EXTRAGALACTIC_REFUGEES$\n\nYou're extra special"
 
  building_emergency_generator: "Emergency Generator"
  building_emergency_generator_desc: "An emergency generator build by the pioneers to help power the evacuation."

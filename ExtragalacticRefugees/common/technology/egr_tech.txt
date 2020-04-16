@@ -7,7 +7,7 @@ egr_improved_generator_1 = {
 	weight = @tier2weight3
 
 	weight_modifier = {
-		factor = 2
+		factor = 1
 		modifier = {
 			factor = 1.25
 			research_leader = {
@@ -35,7 +35,7 @@ egr_improved_generator_1 = {
 egr_improved_generator_2 = {
 	cost = @tier2cost1
 	area = physics
-	tier = 1
+	tier = 2
 	category = { field_manipulation }
 	prerequisites = { "egr_improved_generator_1" }
 	weight = @tier2weight3
