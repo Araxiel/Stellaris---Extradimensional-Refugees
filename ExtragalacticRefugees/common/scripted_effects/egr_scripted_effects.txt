@@ -1,77 +1,91 @@
-
-evacuation_complication_picker = {
-	random_list = {
-		## delayed	-	egr_evacuation.41
-		1 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuaton_delayed_group
+## picks a new random event for the game
+next_evacuation_complication_picker = {
+	if = {
+		limit = {
+			owner = {
+				NOT = { has_country_flag = egr_ongoing_evacuation }
 			}
-			planet_event = { id = egr_evacuation.41 days = 720 random = 100 }
 		}
-		## dead	-	egr_evacuation.42
-		1 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuation_dead_group
+		random_list = {
+			## delayed	-	egr_evacuation.110
+			4 = {
+				modifier = {
+					factor = 0.5
+					owner = { has_country_flag = evacuaton_delayed_group	}
+				}
+				planet_event = { id = egr_evacuation.110 days = 720 random = 100 }
 			}
-			planet_event = { id = egr_evacuation.42 days = 720 random = 100 }
+			## dead	-	egr_evacuation.120
+			1 = {
+				modifier = {
+					factor = 0
+					owner = { has_country_flag = evacuation_dead_group	}
+				}
+				planet_event = { id = egr_evacuation.120 days = 720 random = 100 }
+			}
+			## rulers	-	egr_evacuation.130	TODO
+			0 = {
+				modifier = {
+					factor = 0
+					owner = { has_country_flag = evacuation_rulers_arrived	}
+				}
+				planet_event = { id = egr_evacuation.130 days = 720 random = 360 }
+			}
+			## massive group	-	egr_evacuation.140
+			1 = {
+				modifier = {
+					factor = 0
+					owner = { has_country_flag = evacuation_massive_group	}
+				}
+				planet_event = { id = egr_evacuation.140 days = 720 random = 360 }
+			}
+			## energy problems	-	egr_evacuation.150	TODO, chance = 2
+			0 = {
+				modifier = {
+					factor = 0
+					owner = { has_country_flag = evacuation_energy_problems_2	}
+				}
+				planet_event = { id = egr_evacuation.150 days = 720 random = 360 }
+			}
+			## soldiers	-	egr_evacuation.160	TODO
+			0 = {
+				modifier = {
+					factor = 0
+					owner = { has_country_flag = evacuation_soldiers	}
+				}
+				planet_event = { id = egr_evacuation.160 days = 720 random = 360 }
+			}
+			## enemies	-	egr_evacuation.170	TODO
+			0 = {
+				modifier = {
+					factor = 0
+					owner = { has_country_flag = evacuation_enemies_slipped_through	}
+				}
+				modifier = {
+					factor = 4
+					owner = { has_country_flag = evacuation_homeworld_besieged	}
+				}
+				planet_event = { id = egr_evacuation.170 days = 720 random = 360 }
+			}
+			## normal group	-	egr_evacuation.180
+			6 = {
+				modifier = {
+					factor = 0.25
+					owner = { has_country_flag = evacuation_normal_group	}
+				}
+				modifier = {
+					factor = 0.25
+					check_variable = { which = var_eg_refugees value > 16 }
+				}
+				modifier = {
+					factor = 0.1
+					check_variable = { which = var_eg_refugees value > 30 }
+				}
+				planet_event = { id = egr_evacuation.180 days = 720 random = 360 }
+			}
 		}
-		## rulers	-	egr_evacuation.43
-		1 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuation_rulers_arrived
-			}
-			planet_event = { id = egr_evacuation.43 days = 720 random = 360 }
-		}
-		## massive group	-	egr_evacuation.44
-		1 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuation_massive_group
-			}
-			planet_event = { id = egr_evacuation.44 days = 720 random = 360 }
-		}
-		## energy problems	-	egr_evacuation.45
-		2 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuation_energy_problems_2
-			}
-			planet_event = { id = egr_evacuation.45 days = 720 random = 360 }
-		}
-		## soldiers	-	egr_evacuation.46
-		1 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuation_soldiers
-			}
-			planet_event = { id = egr_evacuation.46 days = 720 random = 360 }
-		}
-		## enemies	-	egr_evacuation.47
-		1 = {
-			modifier = {
-				factor = 0
-				has_country_flag = evacuation_enemies_slipped_through
-			}
-			modifier = {
-				factor = 4
-				has_country_flag = evacuation_homeworld_besieged
-			}
-			planet_event = { id = egr_evacuation.47 days = 720 random = 360 }
-		}
-		## normal group	-	egr_evacuation.50
-		6 = {
-			modifier = {
-				factor = 0.25
-				has_country_flag = evacuation_normal_group
-			}
-			modifier = {
-				factor = 0.25
-				check_variable = { which = var_eg_refugees value > 16 }
-			}
-			planet_event = { id = egr_evacuation.50 days = 720 random = 360 }
+		else = {
+			## TODO
 		}
 	}
 }

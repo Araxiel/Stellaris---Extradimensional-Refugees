@@ -2,3 +2,17 @@ egr_boosted_generator = {
 	icon = "gfx/interface/icons/planet_modifiers/pm_surreal_visions.dds"
 	icon_frame = 3
 }
+
+egr_hope_falls_slightly = {
+	pop_happiness = -0.1
+}
+egr_hope_falls = {
+	pop_happiness = -0.2
+}
+egr_hope_rises = {
+	pop_happiness = 0.15
+}
+
+egr_exhausted_refugees = {
+	planet_pops_organics_upkeep_mult = 0.5
+}

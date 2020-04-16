@@ -43,17 +43,21 @@ country_event = {
 			event_chain = "extragalactic_refugees_chain"
 			target = ROOT
 		}
-		hidden_effect = { set_variable = { which = var_eg_refugees value = 0 } }
-
-		random_owned_planet = {
-			limit = { has_deposit = d_evacuation_gate }
-			planet_event = { id = egr_evacuation.30 days = 40 random = 20 }
-			create_point_of_interest = {
-				id = extragalactic_refugees_chain_poi.1
-				name = "extragalactic_refugees_chain_poi_1"
-				desc = "extragalactic_refugees_chain_poi_1.desc"
-				event_chain = "extragalactic_refugees_chain"
-				location = THIS
+		hidden_effect = { 
+			set_variable = { which = var_eg_refugees value = 0 }
+			country_event = { id = egr_evacuation.50 days = 50 random = 100 }
+			random_owned_planet = {
+				limit = { has_deposit = d_evacuation_gate }
+				planet_event = { id = egr_evacuation.30 days = 40 random = 20 }
+				hidden_effect = {
+					create_point_of_interest = {
+						id = extragalactic_refugees_chain_poi.1
+						name = "extragalactic_refugees_chain_poi_1"
+						desc = "extragalactic_refugees_chain_poi_1.desc"
+						event_chain = "extragalactic_refugees_chain"
+						location = THIS
+					}
+				}
 			}
 		}
 	}
@@ -79,12 +83,13 @@ planet_event = {
 		create_pop = { species = owner_main_species	}
 		create_pop = { species = owner_main_species	}
 		create_pop = { species = owner_main_species ethos = random	}
+		create_pop = { species = owner_main_species ethos = random	}
 		add_building = building_refugee_shelters
 		owner = {
 			add_event_chain_counter = {
 				event_chain = "extragalactic_refugees_chain"
 				counter = "refugees_saved"
-				amount = 3
+				amount = 4
 			}
 			hidden_effect = { change_variable = { which = var_eg_refugees value = 3 } }
 		}
@@ -122,18 +127,104 @@ planet_event = {
 			}
 			hidden_effect = { change_variable = { which = var_eg_refugees value = 3 } }
 		}
-		hidden_effect = {
-			evacuation_complication_picker = yes
+		if = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = egr_ongoing_evacuation }
+				}
+			}
+			random_list = {
+				## delayed	-	egr_evacuation.110
+				4 = {
+					modifier = {
+						factor = 0.5
+						owner = { has_country_flag = evacuaton_delayed_group	}
+					}
+					planet_event = { id = egr_evacuation.110 days = 720 random = 100 }
+				}
+				## dead	-	egr_evacuation.120
+				1 = {
+					modifier = {
+						factor = 0
+						owner = { has_country_flag = evacuation_dead_group	}
+					}
+					planet_event = { id = egr_evacuation.120 days = 720 random = 100 }
+				}
+				## rulers	-	egr_evacuation.130	TODO
+				0 = {
+					modifier = {
+						factor = 0
+						owner = { has_country_flag = evacuation_rulers_arrived	}
+					}
+					planet_event = { id = egr_evacuation.130 days = 720 random = 360 }
+				}
+				## massive group	-	egr_evacuation.140
+				1 = {
+					modifier = {
+						factor = 0
+						owner = { has_country_flag = evacuation_massive_group	}
+					}
+					planet_event = { id = egr_evacuation.140 days = 720 random = 360 }
+				}
+				## energy problems	-	egr_evacuation.150	TODO, chance = 2
+				0 = {
+					modifier = {
+						factor = 0
+						owner = { has_country_flag = evacuation_energy_problems_2	}
+					}
+					planet_event = { id = egr_evacuation.150 days = 720 random = 360 }
+				}
+				## soldiers	-	egr_evacuation.160	TODO
+				0 = {
+					modifier = {
+						factor = 0
+						owner = { has_country_flag = evacuation_soldiers	}
+					}
+					planet_event = { id = egr_evacuation.160 days = 720 random = 360 }
+				}
+				## enemies	-	egr_evacuation.170	TODO
+				0 = {
+					modifier = {
+						factor = 0
+						owner = { has_country_flag = evacuation_enemies_slipped_through	}
+					}
+					modifier = {
+						factor = 4
+						owner = { has_country_flag = evacuation_homeworld_besieged	}
+					}
+					planet_event = { id = egr_evacuation.170 days = 720 random = 360 }
+				}
+				## normal group	-	egr_evacuation.180
+				6 = {
+					modifier = {
+						factor = 0.25
+						owner = { has_country_flag = evacuation_normal_group	}
+					}
+					modifier = {
+						factor = 0.25
+						check_variable = { which = var_eg_refugees value > 16 }
+					}
+					modifier = {
+						factor = 0.1
+						check_variable = { which = var_eg_refugees value > 30 }
+					}
+					planet_event = { id = egr_evacuation.180 days = 720 random = 360 }
+				}
+			}
+			else = {
+				## TODO
+			}
 		}
 	}
 
 }
 
-## egr_evacuation.41	-	 Delayed	TODO
+##	1xx - Random core events
+## egr_evacuation.110	-	 Delayed
 planet_event = {
-	id = egr_evacuation.41
-	title = egr_evacuation.41.name
-	desc = egr_evacuation.41.desc
+	id = egr_evacuation.110
+	title = egr_evacuation.110.name
+	desc = egr_evacuation.110.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -147,19 +238,99 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.41.a
+		name = egr_evacuation.110.a
+
+		every_owned_pop = {
+			add_modifier = {
+				modifier = egr_hope_falls_slightly days = 200
+			}
+		}
+
 		hidden_effect = {
-			evacuation_complication_picker = yes
+			random_list = {
+				1 = {
+					planet_event = { id = egr_evacuation.111 days = 100 random = 200 }
+				}
+				1 = {
+					planet_event = { id = egr_evacuation.112 days = 100 random = 200 }
+				}
+			}
 		}
 	}
 
 }
 
-## egr_evacuation.42	-	 Dead	TODO
+## egr_evacuation.111	-	 Delayed Arrived
 planet_event = {
-	id = egr_evacuation.42
-	title = egr_evacuation.42.name
-	desc = egr_evacuation.42.desc
+	id = egr_evacuation.111
+	title = egr_evacuation.111.name
+	desc = egr_evacuation.111.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = egr_evacuation.111.a
+
+		every_owned_pop = {
+			add_modifier = {
+				modifier = egr_hope_rises days = 720
+			}
+		}
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species	}
+		create_pop = { species = owner_main_species ethos = random	}
+		create_pop = { species = owner_main_species ethos = random	}
+		owner = {
+			add_event_chain_counter = {
+				event_chain = "extragalactic_refugees_chain"
+				counter = "refugees_saved"
+				amount = 5
+			}
+			hidden_effect = { change_variable = { which = var_eg_refugees value = 5 } }
+		}
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
+	}
+
+}
+
+## egr_evacuation.112	-	 Delayed Dead
+planet_event = {
+	id = egr_evacuation.112
+	title = egr_evacuation.112.name
+	desc = egr_evacuation.112.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = egr_evacuation.112.a
+		every_owned_pop = {
+			add_modifier = {
+				modifier = egr_hope_falls days = 720
+			}
+		}
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
+	}
+
+}
+
+## egr_evacuation.120	-	 Dead
+planet_event = {
+	id = egr_evacuation.120
+	title = egr_evacuation.120.name
+	desc = egr_evacuation.120.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -173,19 +344,22 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.42.a
-		hidden_effect = {
-			evacuation_complication_picker = yes
+		name = egr_evacuation.120.a
+		every_owned_pop = {
+			add_modifier = {
+				modifier = egr_hope_falls days = 720
+			}
 		}
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
 	}
 
 }
 
-## egr_evacuation.43	-	 rulers	TODO
+## egr_evacuation.130	-	 rulers	TODO
 planet_event = {
-	id = egr_evacuation.43
-	title = egr_evacuation.43.name
-	desc = egr_evacuation.43.desc
+	id = egr_evacuation.130
+	title = egr_evacuation.130.name
+	desc = egr_evacuation.130.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -199,19 +373,17 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.43.a
-		hidden_effect = {
-			evacuation_complication_picker = yes
-		}
+		name = egr_evacuation.130.a
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
 	}
 
 }
 
-## egr_evacuation.44	-	 massive group	TODO
+## egr_evacuation.140	-	 massive group
 planet_event = {
-	id = egr_evacuation.44
-	title = egr_evacuation.44.name
-	desc = egr_evacuation.44.desc
+	id = egr_evacuation.140
+	title = egr_evacuation.140.name
+	desc = egr_evacuation.140.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -225,19 +397,75 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.44.a
+		name = egr_evacuation.140.a
 		hidden_effect = {
-			evacuation_complication_picker = yes
+			planet_event = { id = egr_evacuation.141 days = 100 random = 100 }
 		}
 	}
 
 }
 
-## egr_evacuation.45	-	 energy problems	TODO
+## egr_evacuation.141	-	 massive group arrival
 planet_event = {
-	id = egr_evacuation.45
-	title = egr_evacuation.45.name
-	desc = egr_evacuation.45.desc
+	id = egr_evacuation.141
+	title = egr_evacuation.141.name
+	desc = egr_evacuation.141.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+	}
+
+	option = {
+		name = egr_evacuation.141.a
+
+		every_owned_pop = {
+			add_modifier = {
+				modifier = egr_hope_rises days = 720
+			}
+		}
+		create_pop = { species = owner_main_species	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		create_pop = { species = owner_main_species ethos = random	}
+		hidden_effect = { last_created_pop = {	add_modifier = {	modifier = egr_exhausted_refugees days = 360	}	} }
+		owner = {
+			add_event_chain_counter = {
+				event_chain = "extragalactic_refugees_chain"
+				counter = "refugees_saved"
+				amount = 10
+			}
+			hidden_effect = { change_variable = { which = var_eg_refugees value = 10 } }
+		}
+
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
+	}
+
+}
+
+## egr_evacuation.150	-	 energy problems	TODO
+planet_event = {
+	id = egr_evacuation.150
+	title = egr_evacuation.150.name
+	desc = egr_evacuation.150.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -259,19 +487,17 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.45.a
-		hidden_effect = {
-			evacuation_complication_picker = yes
-		}
+		name = egr_evacuation.150.a
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
 	}
 
 }
 
-## egr_evacuation.46	-	 soldiers	TODO
+## egr_evacuation.160	-	 soldiers	TODO
 planet_event = {
-	id = egr_evacuation.46
-	title = egr_evacuation.46.name
-	desc = egr_evacuation.46.desc
+	id = egr_evacuation.160
+	title = egr_evacuation.160.name
+	desc = egr_evacuation.160.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -285,19 +511,17 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.46.a
-		hidden_effect = {
-			evacuation_complication_picker = yes
-		}
+		name = egr_evacuation.160.a
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
 	}
 
 }
 
-## egr_evacuation.47	-	 enemies	TODO
+## egr_evacuation.170	-	 enemies	TODO
 planet_event = {
-	id = egr_evacuation.47
-	title = egr_evacuation.47.name
-	desc = egr_evacuation.47.desc
+	id = egr_evacuation.170
+	title = egr_evacuation.170.name
+	desc = egr_evacuation.170.desc
 	picture = GFX_evt_ship_offloading_cargo
 	show_sound = event_yellow_alert
 	location = root
@@ -311,16 +535,149 @@ planet_event = {
 	}
 
 	option = {
-		name = egr_evacuation.47.a
-		hidden_effect = {
-			evacuation_complication_picker = yes
-		}
+		name = egr_evacuation.170.a
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
 	}
 
 }
 
-## egr_evacuation.50	-	 normal group	TODO
+## egr_evacuation.180	-	 normal group	TODO
 planet_event = {
+	id = egr_evacuation.180
+	title = egr_evacuation.180.name
+	desc = egr_evacuation.180.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_normal_group
+			random_list = {
+				1 = {
+					set_country_flag = evacuation_normal_group_4
+				}
+				1 = {
+					set_country_flag = evacuation_normal_group_5
+				}
+				1 = {
+					set_country_flag = evacuation_normal_group_6
+				}
+				1 = {
+					set_country_flag = evacuation_normal_group_7
+				}
+			}
+		}
+	}
+
+	option = {
+		name = egr_evacuation.31.a
+
+		if = {
+			limit = { owner = { has_country_flag = evacuation_normal_group_4 }}
+
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species ethos = random	}
+			owner = {
+				add_event_chain_counter = {
+					event_chain = "extragalactic_refugees_chain"
+					counter = "refugees_saved"
+					amount = 4
+				}
+				hidden_effect = { change_variable = { which = var_eg_refugees value = 4 } }
+			}
+		}
+		if = {
+			limit = { owner = { has_country_flag = evacuation_normal_group_5 }}
+
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species ethos = random	}
+			create_pop = { species = owner_main_species ethos = random	}
+			owner = {
+				add_event_chain_counter = {
+					event_chain = "extragalactic_refugees_chain"
+					counter = "refugees_saved"
+					amount = 5
+				}
+				hidden_effect = { change_variable = { which = var_eg_refugees value = 5 } }
+			}
+		}
+		if = {
+			limit = { owner = { has_country_flag = evacuation_normal_group_6 }}
+
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species ethos = random	}
+			create_pop = { species = owner_main_species ethos = random	}
+			create_pop = { species = owner_main_species ethos = random	}
+			owner = {
+				add_event_chain_counter = {
+					event_chain = "extragalactic_refugees_chain"
+					counter = "refugees_saved"
+					amount = 6
+				}
+				hidden_effect = { change_variable = { which = var_eg_refugees value = 6 } }
+			}
+		}
+		if = {
+			limit = { owner = { has_country_flag = evacuation_normal_group_7 }}
+
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species	}
+			create_pop = { species = owner_main_species ethos = random	}
+			create_pop = { species = owner_main_species ethos = random	}
+			create_pop = { species = owner_main_species ethos = random	}
+			owner = {
+				add_event_chain_counter = {
+					event_chain = "extragalactic_refugees_chain"
+					counter = "refugees_saved"
+					amount = 7
+				}
+				hidden_effect = { change_variable = { which = var_eg_refugees value = 7 } }
+			}
+		}
+
+		hidden_effect = {	next_evacuation_complication_picker = yes	}
+	}
+
+}
+
+
+## egr_evacuation.300	-	 Siege started
+planet_event = {
+	id = egr_evacuation.300
+	title = egr_evacuation.300.name
+	desc = egr_evacuation.300.desc
+	picture = GFX_evt_ship_offloading_cargo
+	show_sound = event_yellow_alert
+	location = root
+
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			set_country_flag = evacuation_homeworld_besieged
+		}
+	}
+
+	option = {
+		name = egr_evacuation.31.a
+
+	}
+
+}
+
+## egr_evacuation.50	-	Bonus tech
+country_event = {
 	id = egr_evacuation.50
 	title = egr_evacuation.50.name
 	desc = egr_evacuation.50.desc
@@ -331,16 +688,150 @@ planet_event = {
 	is_triggered_only = yes
 
 	immediate = {
-		owner = {
-			set_country_flag = evacuation_normal_group
+		random_list = {
+			1 = {	set_country_flag = egr_t1_1 }
+			1 = {	set_country_flag = egr_t1_2 }
+		}
+		random_list = {
+			1 = {	set_country_flag = egr_t2_1 }
+			1 = {	set_country_flag = egr_t2_2 }
+		}
+		random_list = {
+			1 = {	set_country_flag = egr_t3_1 }
+			1 = {	set_country_flag = egr_t3_2 }
+			1 = {	set_country_flag = egr_t3_3 }
+		}
+		random_list = {
+			1 = {	set_country_flag = egr_t4_1 }
+			1 = {	set_country_flag = egr_t4_2 }
+			1 = {	set_country_flag = egr_t4_3 }
+			1 = {	set_country_flag = egr_t4_4 }
+			1 = {	set_country_flag = egr_t4_5 }
 		}
 	}
 
+	# offensive
 	option = {
 		name = egr_evacuation.50.a
-		hidden_effect = {
-			evacuation_complication_picker = yes
+
+		if = {
+			limit = { has_country_flag = egr_t1_1 }
+			add_tech_progress = { tech = tech_destroyers progress = 0.4 } add_research_option = tech_destroyers
 		}
+		if = {
+			limit = { has_country_flag = egr_t1_2 }
+			add_tech_progress = { tech = tech_corvette_build_speed progress = 0.4 } add_research_option = tech_corvette_build_speed
+		}
+		if = {
+			limit = { has_country_flag = egr_t2_1 }
+			add_tech_progress = { tech = tech_starbase_3 progress = 0.4 } add_research_option = tech_starbase_3
+		}
+		if = {
+			limit = { has_country_flag = egr_t2_2 }
+			add_tech_progress = { tech = tech_space_defense_station_improvement progress = 0.2 } add_research_option = tech_space_defense_station_improvement
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_1 }
+			add_tech_progress = { tech = tech_mass_drivers_2 progress = 0.4 } add_research_option = tech_mass_drivers_2
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_2 }
+			add_tech_progress = { tech = tech_strike_craft_1 progress = 0.3 } add_research_option = tech_strike_craft_1
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_3 }
+			add_tech_progress = { tech = tech_missiles_2 progress = 0.3 } add_research_option = tech_missiles_2
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_4 }
+			add_tech_progress = { tech = tech_lasers_2 progress = 0.3 } add_research_option = tech_lasers_2
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_5 }
+			add_tech_progress = { tech = tech_plasma_1 progress = 0.3 } add_research_option = tech_plasma_1
+		}
+
 	}
 
+	# defensive
+	option = {
+		name = egr_evacuation.50.b
+
+		if = {
+			limit = { has_country_flag = egr_t1_1 }
+			add_tech_progress = { tech = tech_ship_armor_1 progress = 0.4 } add_research_option = tech_ship_armor_1
+		}
+		if = {
+			limit = { has_country_flag = egr_t1_2 }
+			add_tech_progress = { tech = tech_powered_exoskeletons progress = 0.2 } add_research_option = tech_powered_exoskeletons
+		}
+		if = {
+			limit = { has_country_flag = egr_t2_1 }
+			add_tech_progress = { tech = tech_basic_science_lab_2 progress = 0.4 } add_research_option = tech_basic_science_lab_2
+		}
+		if = {
+			limit = { has_country_flag = egr_t2_2 }
+			add_tech_progress = { tech = tech_space_science_1 progress = 0.5 } add_research_option = tech_space_science_1
+		}
+		if = {
+			limit = { has_country_flag = egr_t3_1 }
+			add_tech_progress = { tech = tech_combat_computers_1 progress = 0.3 } add_research_option = tech_combat_computers_1
+		}
+		if = {
+			limit = { has_country_flag = egr_t3_2 }
+			add_tech_progress = { tech = tech_fusion_power progress = 0.3 } add_research_option = tech_fusion_power
+		}
+		if = {
+			limit = { has_country_flag = egr_t3_3 }
+			add_tech_progress = { tech = tech_shields_2 progress = 0.3 } add_research_option = tech_shields_2
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_1 }
+			add_tech_progress = { tech = tech_space_trading progress = 0.3 } add_research_option = tech_space_trading
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_2 }
+			add_tech_progress = { tech = tech_eco_simulation progress = 0.3 } add_research_option = tech_eco_simulation
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_3 }
+			add_tech_progress = { tech = tech_society_1 progress = 0.3 } add_research_option = tech_society_1
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_4 }
+			add_tech_progress = { tech = tech_gene_banks progress = 0.3 } add_research_option = tech_gene_banks
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_5 }
+			add_tech_progress = { tech = tech_doctrine_fleet_size_1 progress = 0.3 } add_research_option = tech_doctrine_fleet_size_1
+		}
+	}
+	# cultural
+	option = {
+		name = egr_evacuation.50.c
+
+		if = {
+			limit = { has_country_flag = egr_t4_1 }
+			add_tech_progress = { tech = tech_planetary_unification progress = 0.3 } add_research_option = tech_planetary_unification
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_2 }
+			add_tech_progress = { tech = tech_subdermal_stimulation progress = 0.3 } add_research_option = tech_subdermal_stimulation
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_3 }
+			add_tech_progress = { tech = tech_adaptive_bureaucracy progress = 0.3 } add_research_option = tech_adaptive_bureaucracy
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_4 }
+			add_tech_progress = { tech = tech_living_state progress = 0.3 } add_research_option = tech_living_state
+		}
+		if = {
+			limit = { has_country_flag = egr_t4_5 }
+			add_tech_progress = { tech = tech_artificial_moral_codes progress = 0.3 } add_research_option = tech_artificial_moral_codes
+		}
+		add_tech_progress = { tech = tech_heritage_site progress = 0.7 } add_research_option = tech_heritage_site
+		add_resource = { influence = 40 }
+		add_resource = { unity = 250 }
+	}
 }
